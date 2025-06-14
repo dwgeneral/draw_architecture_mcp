@@ -1,0 +1,25 @@
+{
+  "mcpServers": {
+    "draw-architecture": {
+      "command": "python3",
+      "args": ["mcp_server.py"],
+      "env": {
+        "PYTHONPATH": "."
+      },
+      "description": "Draw.io架构图生成服务",
+      "version": "1.0.0",
+      "capabilities": {
+        "resources": true,
+        "tools": true,
+        "prompts": false,
+        "logging": true
+      },
+      "metadata": {
+        "author": "Draw Architecture MCP",
+        "license": "MIT",
+        "homepage": "https://github.com/your-repo/draw-architecture-mcp",
+        "tags": ["architecture", "diagram", "draw.io", "visualization"]
+      }
+    }
+  }
+}

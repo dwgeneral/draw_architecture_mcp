@@ -1,0 +1,22 @@
+# MCP Draw Architecture Server Dependencies
+
+# MCP SDK
+mcp>=1.0.0
+
+# 异步支持
+aiofiles>=23.0.0
+
+# XML处理
+lxml>=4.9.0
+
+# 日志和调试
+rich>=13.0.0
+
+# 类型检查
+mypy>=1.0.0
+
+# 开发工具
+pytest>=7.0.0
+pytest-asyncio>=0.21.0
+black>=23.0.0
+flake8>=6.0.0
