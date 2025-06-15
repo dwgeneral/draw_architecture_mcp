@@ -22,6 +22,9 @@ from mcp.types import (
     EmbeddedResource,
     LoggingLevel
 )
+from mcp.server.models import ServerCapabilities
+from mcp.shared.context import RequestContext
+from mcp.server.lowlevel.server import NotificationOptions
 
 # 设置日志
 logging.basicConfig(level=logging.INFO)
@@ -324,7 +327,7 @@ async def main():
                 server_name="draw-architecture",
                 server_version="1.0.0",
                 capabilities=server.get_capabilities(
-                    notification_options=None,
+                    notification_options=NotificationOptions(),
                     experimental_capabilities={}
                 )
             )

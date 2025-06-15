@@ -218,7 +218,7 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 ## 更新日志
 
-### v1.0.0 (2024-01-XX)
+### v1.0.0 (2025-06-14)
 - 初始版本发布
 - 支持基础架构图生成
 - 提供文件验证功能
@@ -226,6 +226,6 @@ MIT License - 详见 [LICENSE](LICENSE) 文件
 
 ## 联系方式
 
-- 项目主页: [GitHub Repository](https://github.com/your-repo/draw-architecture-mcp)
-- 问题反馈: [Issues](https://github.com/your-repo/draw-architecture-mcp/issues)
-- 功能建议: [Discussions](https://github.com/your-repo/draw-architecture-mcp/discussions)
+- 项目主页: [GitHub Repository](https://github.com/dwgeneral/draw_architecture_mcp)
+- 问题反馈: [Issues](https://github.com/dwgeneral/draw_architecture_mcp/issues)
+- 功能建议: [Discussions](https://github.com/dwgeneral/draw_architecture_mcp/discussions)
