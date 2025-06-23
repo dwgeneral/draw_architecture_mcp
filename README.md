@@ -1,14 +1,16 @@
-# Draw.io 架构图 MCP 服务
+# Draw Architecture MCP Server
 
-一个专门用于生成 draw.io 架构图的 MCP (Model Context Protocol) 服务，让 AI 助手能够更方便地创建专业的系统架构图。
+一个专业的架构图绘制 MCP 服务器，集成智谱AI大模型，能够根据文本描述自动生成 draw.io 格式的系统架构图。
 
 ## 功能特性
 
-- 🎨 **专业架构图生成**: 基于描述自动生成符合规范的 draw.io 架构图
-- 📋 **提示词模板**: 提供专业的架构图绘制提示词
-- ✅ **文件验证**: 验证 draw.io 文件格式的正确性
-- 🔧 **XML 格式修复**: 自动处理 XML 转义和格式问题
-- 🚀 **易于集成**: 标准 MCP 协议，支持多种 AI 客户端
+- 🤖 **AI 驱动生成**：集成智谱AI免费大模型，智能理解架构需求
+- 🎨 **智能架构图生成**：根据文本描述自动生成专业的系统架构图
+- 📊 **Draw.io 兼容**：生成标准的 .drawio 格式文件，可直接导入 draw.io 编辑
+- 🏗️ **多种架构模式**：支持微服务、分层架构、事件驱动等多种架构模式
+- 🎯 **专业提示词**：内置专业的架构设计提示词模板
+- 🔧 **MCP 协议**：基于 Model Context Protocol，可与支持 MCP 的 AI 助手集成
+- 💰 **免费使用**：使用智谱AI的免费额度，无需付费即可体验
 
 ## 安装配置
 
@@ -27,7 +29,23 @@ cd draw_architecture_mcp
 pip install -r requirements.txt
 ```
 
-### 3. 配置 MCP 客户端
+### 3. 配置智谱AI API Key
+
+#### 获取API Key
+1. 访问 [智谱AI开放平台](https://open.bigmodel.cn/)
+2. 注册账号并登录
+3. 在控制台获取API Key（新用户有免费额度）
+
+#### 配置环境变量
+```bash
+# 复制环境变量模板
+cp .env.example .env
+
+# 编辑 .env 文件，填入你的API Key
+echo "ZHIPUAI_API_KEY=your_actual_api_key_here" > .env
+```
+
+### 4. 配置 MCP 客户端
 
 #### Claude Desktop 配置
 
@@ -45,7 +63,8 @@ pip install -r requirements.txt
       "command": "python3",
       "args": ["/path/to/draw_architecture_mcp/mcp_server.py"],
       "env": {
-        "PYTHONPATH": "/path/to/draw_architecture_mcp"
+        "PYTHONPATH": "/path/to/draw_architecture_mcp",
+        "ZHIPUAI_API_KEY": "your_api_key_here"
       }
     }
   }
@@ -61,7 +80,10 @@ pip install -r requirements.txt
   "mcpServers": {
     "draw-architecture": {
       "command": "python3",
-      "args": ["/path/to/draw_architecture_mcp/mcp_server.py"]
+      "args": ["/path/to/draw_architecture_mcp/mcp_server.py"],
+      "env": {
+        "ZHIPUAI_API_KEY": "your_api_key_here"
+      }
     }
   }
 }
@@ -77,33 +99,75 @@ pip install -r requirements.txt
 
 ## 使用方法
 
-### 1. 生成架构图
+### 基本用法
+
+在支持 MCP 的 AI 客户端中，你可以这样使用：
 
 ```
-请帮我生成一个电商系统的架构图，包括：
-- 前端：Web端、移动端、小程序
-- 后端：用户服务、商品服务、订单服务、支付服务
-- 数据库：MySQL、Redis、Elasticsearch
-- 中间件：消息队列、API网关
+请帮我绘制一个电商系统的架构图，包括：
+- 前端：Web应用、移动App
+- 后端：用户服务、商品服务、订单服务
+- 数据库：MySQL、Redis
+- 消息队列：Kafka
 ```
+
+### 高级用法
+
+```
+绘制一个微服务架构的在线教育平台：
+
+前端层：
+- React Web应用
+- Flutter移动应用
+- 管理后台
+
+网关层：
+- API网关（Kong）
+- 负载均衡（Nginx）
+
+业务服务层：
+- 用户认证服务
+- 课程管理服务
+- 视频播放服务
+- 支付服务
+- 消息通知服务
+
+数据层：
+- MySQL（用户数据、课程数据）
+- MongoDB（视频元数据）
+- Redis（缓存、会话）
+- Elasticsearch（搜索）
+
+基础设施：
+- Docker容器化
+- Kubernetes编排
+- 监控（Prometheus + Grafana）
+- 日志（ELK Stack）
+```
+
+## 技术架构
+
+### AI 模型集成
+- **智谱AI GLM-4-Flash**：免费的大语言模型，专门优化架构图生成
+- **专业提示词模板**：内置完整的架构设计指导模板
+- **智能回退机制**：AI调用失败时自动回退到规则引擎
+
+### 生成流程
+1. **需求分析**：解析用户的架构描述
+2. **模板整合**：将用户需求与专业提示词模板结合
+3. **AI生成**：调用智谱AI生成完整的draw.io XML代码
+4. **格式验证**：确保生成的XML符合draw.io标准
+5. **文件保存**：保存为.drawio格式文件
+
+### 支持的架构模式
+- 分层架构（Layered Architecture）
+- 微服务架构（Microservices）
+- 事件驱动架构（Event-Driven）
+- 六边形架构（Hexagonal）
+- CQRS架构
+- 服务网格（Service Mesh）
 
 AI 助手会使用 `generate_architecture_diagram` 工具生成对应的 draw.io 文件。
-
-### 2. 获取专业提示词
-
-```
-请提供 draw.io 架构图绘制的专业提示词模板
-```
-
-AI 助手会使用 `get_architecture_prompt` 工具返回完整的提示词模板。
-
-### 3. 验证文件格式
-
-```
-请验证这个 draw.io 文件的格式是否正确：/path/to/diagram.drawio
-```
-
-AI 助手会使用 `validate_drawio_file` 工具检查文件格式。
 
 ## API 参考
 
@@ -126,19 +190,6 @@ AI 助手会使用 `validate_drawio_file` 工具检查文件格式。
   "output_file": "./ecommerce_architecture.drawio"
 }
 ```
-
-#### `get_architecture_prompt`
-
-获取专业的架构图绘制提示词模板。
-
-**参数**: 无
-
-#### `validate_drawio_file`
-
-验证 draw.io 文件格式。
-
-**参数**:
-- `file_path` (string, 必需): 要验证的文件路径
 
 ### 资源列表
 

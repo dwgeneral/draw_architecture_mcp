@@ -1,0 +1,851 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>配音学英语 - 让英语学习更有趣</title>
+  <style>
+    /* CSS重置和基础样式 */
+    * {
+      margin: 0;
+      padding: 0;
+      box-sizing: border-box;
+    }
+
+    /* CSS变量定义 */
+    :root {
+      --primary-color: #007bff;
+      --success-color: #28a745;
+      --warning-color: #ffc107;
+      --danger-color: #dc3545;
+      --info-color: #17a2b8;
+      --light-color: #f8f9fa;
+      --dark-color: #212529;
+      --secondary-color: #6c757d;
+      --border-radius: 8px;
+      --shadow: 0 2px 10px rgba(0,0,0,0.1);
+      --transition: all 0.3s ease;
+    }
+
+    body {
+      font-family: -apple-system, BlinkMacSystemFont, 'Segoe UI', Roboto, sans-serif;
+      background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+      min-height: 100vh;
+      color: var(--dark-color);
+    }
+
+    /* 容器样式 */
+    .app-container {
+      max-width: 375px;
+      margin: 0 auto;
+      background: white;
+      min-height: 100vh;
+      position: relative;
+      box-shadow: 0 0 20px rgba(0,0,0,0.2);
+    }
+
+    /* 顶部导航栏 */
+    .header {
+      background: var(--primary-color);
+      color: white;
+      padding: 20px 16px 16px;
+      position: relative;
+    }
+
+    .header-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .user-info {
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .avatar {
+      width: 32px;
+      height: 32px;
+      border-radius: 50%;
+      background: rgba(255,255,255,0.2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 14px;
+    }
+
+    .notification-btn {
+      background: none;
+      border: none;
+      color: white;
+      font-size: 18px;
+      cursor: pointer;
+      padding: 4px;
+    }
+
+    .welcome-text {
+      font-size: 24px;
+      font-weight: bold;
+      margin-bottom: 4px;
+    }
+
+    .subtitle {
+      opacity: 0.9;
+      font-size: 14px;
+    }
+
+    /* 学习进度卡片 */
+    .progress-card {
+      background: white;
+      margin: -20px 16px 20px;
+      padding: 20px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+    }
+
+    .progress-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 16px;
+    }
+
+    .progress-title {
+      font-size: 16px;
+      font-weight: 600;
+    }
+
+    .streak {
+      background: var(--warning-color);
+      color: white;
+      padding: 4px 8px;
+      border-radius: 12px;
+      font-size: 12px;
+      font-weight: 500;
+    }
+
+    .progress-bar {
+      background: var(--light-color);
+      height: 8px;
+      border-radius: 4px;
+      overflow: hidden;
+      margin-bottom: 8px;
+    }
+
+    .progress-fill {
+      background: linear-gradient(90deg, var(--success-color), #20c997);
+      height: 100%;
+      width: 65%;
+      transition: var(--transition);
+    }
+
+    .progress-text {
+      font-size: 12px;
+      color: var(--secondary-color);
+    }
+
+    /* 主要功能区域 */
+    .main-content {
+      padding: 0 16px;
+    }
+
+    .section-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+      color: var(--dark-color);
+    }
+
+    /* 功能卡片网格 */
+    .feature-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+      margin-bottom: 24px;
+    }
+
+    .feature-card {
+      background: white;
+      padding: 20px 16px;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      text-align: center;
+      cursor: pointer;
+      transition: var(--transition);
+      border: 2px solid transparent;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 4px 20px rgba(0,0,0,0.15);
+    }
+
+    .feature-card.active {
+      border-color: var(--primary-color);
+    }
+
+    .feature-icon {
+      width: 48px;
+      height: 48px;
+      margin: 0 auto 12px;
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      font-size: 24px;
+    }
+
+    .feature-icon.dubbing {
+      background: linear-gradient(135deg, #ff6b6b, #ee5a24);
+      color: white;
+    }
+
+    .feature-icon.listening {
+      background: linear-gradient(135deg, #4834d4, #686de0);
+      color: white;
+    }
+
+    .feature-icon.speaking {
+      background: linear-gradient(135deg, #00d2d3, #54a0ff);
+      color: white;
+    }
+
+    .feature-icon.community {
+      background: linear-gradient(135deg, #ff9ff3, #f368e0);
+      color: white;
+    }
+
+    .feature-title {
+      font-size: 14px;
+      font-weight: 600;
+      margin-bottom: 4px;
+    }
+
+    .feature-desc {
+      font-size: 12px;
+      color: var(--secondary-color);
+    }
+
+    /* 推荐内容 */
+    .recommended-content {
+      margin-bottom: 24px;
+    }
+
+    .content-card {
+      background: white;
+      border-radius: var(--border-radius);
+      box-shadow: var(--shadow);
+      overflow: hidden;
+      margin-bottom: 12px;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .content-card:hover {
+      transform: translateY(-1px);
+      box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+    }
+
+    .content-image {
+      width: 100%;
+      height: 120px;
+      background: linear-gradient(45deg, #667eea, #764ba2);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: white;
+      font-size: 48px;
+      position: relative;
+    }
+
+    .play-button {
+      position: absolute;
+      width: 40px;
+      height: 40px;
+      background: rgba(255,255,255,0.9);
+      border-radius: 50%;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--primary-color);
+      font-size: 16px;
+    }
+
+    .content-info {
+      padding: 16px;
+    }
+
+    .content-title {
+      font-size: 16px;
+      font-weight: 600;
+      margin-bottom: 8px;
+      line-height: 1.4;
+    }
+
+    .content-meta {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      font-size: 12px;
+      color: var(--secondary-color);
+    }
+
+    .difficulty {
+      background: var(--info-color);
+      color: white;
+      padding: 2px 8px;
+      border-radius: 10px;
+      font-size: 10px;
+    }
+
+    .difficulty.easy {
+      background: var(--success-color);
+    }
+
+    .difficulty.medium {
+      background: var(--warning-color);
+    }
+
+    .difficulty.hard {
+      background: var(--danger-color);
+    }
+
+    /* 底部导航 */
+    .bottom-nav {
+      position: fixed;
+      bottom: 0;
+      left: 50%;
+      transform: translateX(-50%);
+      width: 100%;
+      max-width: 375px;
+      background: white;
+      border-top: 1px solid #eee;
+      display: flex;
+      justify-content: space-around;
+      padding: 8px 0 20px;
+    }
+
+    .nav-item {
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      text-decoration: none;
+      color: var(--secondary-color);
+      transition: var(--transition);
+      padding: 8px;
+    }
+
+    .nav-item.active {
+      color: var(--primary-color);
+    }
+
+    .nav-icon {
+      font-size: 20px;
+      margin-bottom: 4px;
+    }
+
+    .nav-label {
+      font-size: 10px;
+    }
+
+    /* 模态框样式 */
+    .modal {
+      display: none;
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0,0,0,0.5);
+      z-index: 1000;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .modal.show {
+      display: flex;
+    }
+
+    .modal-content {
+      background: white;
+      margin: 20px;
+      padding: 24px;
+      border-radius: var(--border-radius);
+      max-width: 320px;
+      width: 100%;
+      text-align: center;
+    }
+
+    .modal-title {
+      font-size: 18px;
+      font-weight: 600;
+      margin-bottom: 16px;
+    }
+
+    .modal-text {
+      color: var(--secondary-color);
+      margin-bottom: 20px;
+      line-height: 1.5;
+    }
+
+    .modal-buttons {
+      display: flex;
+      gap: 12px;
+    }
+
+    .btn {
+      flex: 1;
+      padding: 12px;
+      border: none;
+      border-radius: var(--border-radius);
+      font-weight: 500;
+      cursor: pointer;
+      transition: var(--transition);
+    }
+
+    .btn-primary {
+      background: var(--primary-color);
+      color: white;
+    }
+
+    .btn-secondary {
+      background: var(--light-color);
+      color: var(--dark-color);
+    }
+
+    .btn:hover {
+      opacity: 0.9;
+      transform: translateY(-1px);
+    }
+
+    /* 响应式设计 */
+    @media (max-width: 320px) {
+      .feature-grid {
+        grid-template-columns: 1fr;
+      }
+      
+      .welcome-text {
+        font-size: 20px;
+      }
+    }
+
+    /* 动画效果 */
+    @keyframes fadeInUp {
+      from {
+        opacity: 0;
+        transform: translateY(20px);
+      }
+      to {
+        opacity: 1;
+        transform: translateY(0);
+      }
+    }
+
+    .content-card {
+      animation: fadeInUp 0.5s ease forwards;
+    }
+
+    .content-card:nth-child(2) {
+      animation-delay: 0.1s;
+    }
+
+    .content-card:nth-child(3) {
+      animation-delay: 0.2s;
+    }
+  </style>
+</head>
+<body>
+  <div class="app-container">
+    <!-- 顶部导航栏 -->
+    <header class="header">
+      <div class="header-top">
+        <div class="user-info">
+          <div class="avatar">👤</div>
+          <span>小明</span>
+        </div>
+        <button class="notification-btn" onclick="showNotification()">🔔</button>
+      </div>
+      <div class="welcome-text">早上好！</div>
+      <div class="subtitle">今天也要加油学英语哦～</div>
+    </header>
+
+    <!-- 学习进度卡片 -->
+    <div class="progress-card">
+      <div class="progress-header">
+        <div class="progress-title">今日学习进度</div>
+        <div class="streak">🔥 连续7天</div>
+      </div>
+      <div class="progress-bar">
+        <div class="progress-fill"></div>
+      </div>
+      <div class="progress-text">已完成 3/5 个任务 (65%)</div>
+    </div>
+
+    <!-- 主要内容区域 -->
+    <main class="main-content">
+      <!-- 功能模块 -->
+      <section>
+        <h2 class="section-title">学习模块</h2>
+        <div class="feature-grid">
+          <div class="feature-card active" onclick="selectFeature('dubbing')">
+            <div class="feature-icon dubbing">🎬</div>
+            <div class="feature-title">影视配音</div>
+            <div class="feature-desc">经典电影片段配音</div>
+          </div>
+          <div class="feature-card" onclick="selectFeature('listening')">
+            <div class="feature-icon listening">👂</div>
+            <div class="feature-title">听力训练</div>
+            <div class="feature-desc">提升英语听力水平</div>
+          </div>
+          <div class="feature-card" onclick="selectFeature('speaking')">
+            <div class="feature-icon speaking">🗣️</div>
+            <div class="feature-title">口语练习</div>
+            <div class="feature-desc">AI智能发音纠正</div>
+          </div>
+          <div class="feature-card" onclick="selectFeature('community')">
+            <div class="feature-icon community">👥</div>
+            <div class="feature-title">学习社区</div>
+            <div class="feature-desc">与其他学习者交流</div>
+          </div>
+        </div>
+      </section>
+
+      <!-- 推荐内容 -->
+      <section class="recommended-content">
+        <h2 class="section-title">推荐内容</h2>
+        
+        <div class="content-card" onclick="startDubbing('titanic')">
+          <div class="content-image">
+            🚢
+            <div class="play-button">▶️</div>
+          </div>
+          <div class="content-info">
+            <div class="content-title">泰坦尼克号 - 经典爱情对白</div>
+            <div class="content-meta">
+              <span>⏱️ 3分钟</span>
+              <span class="difficulty easy">简单</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" onclick="startDubbing('friends')">
+          <div class="content-image">
+            ☕
+            <div class="play-button">▶️</div>
+          </div>
+          <div class="content-info">
+            <div class="content-title">老友记 - 日常生活对话</div>
+            <div class="content-meta">
+              <span>⏱️ 5分钟</span>
+              <span class="difficulty medium">中等</span>
+            </div>
+          </div>
+        </div>
+
+        <div class="content-card" onclick="startDubbing('ted')">
+          <div class="content-image">
+            🎤
+            <div class="play-button">▶️</div>
+          </div>
+          <div class="content-info">
+            <div class="content-title">TED演讲 - 科技与未来</div>
+            <div class="content-meta">
+              <span>⏱️ 8分钟</span>
+              <span class="difficulty hard">困难</span>
+            </div>
+          </div>
+        </div>
+      </section>
+    </main>
+
+    <!-- 底部导航 -->
+    <nav class="bottom-nav">
+      <a href="#" class="nav-item active">
+        <div class="nav-icon">🏠</div>
+        <div class="nav-label">首页</div>
+      </a>
+      <a href="#" class="nav-item" onclick="showProgress()">
+        <div class="nav-icon">📊</div>
+        <div class="nav-label">进度</div>
+      </a>
+      <a href="#" class="nav-item" onclick="showCommunity()">
+        <div class="nav-icon">👥</div>
+        <div class="nav-label">社区</div>
+      </a>
+      <a href="#" class="nav-item" onclick="showProfile()">
+        <div class="nav-icon">👤</div>
+        <div class="nav-label">我的</div>
+      </a>
+    </nav>
+  </div>
+
+  <!-- 模态框 -->
+  <div id="modal" class="modal">
+    <div class="modal-content">
+      <div class="modal-title">开始配音练习</div>
+      <div class="modal-text">准备好开始这段精彩的配音练习了吗？系统会实时分析你的发音并给出建议。</div>
+      <div class="modal-buttons">
+        <button class="btn btn-secondary" onclick="closeModal()">取消</button>
+        <button class="btn btn-primary" onclick="startPractice()">开始</button>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    // 应用状态管理
+    const appState = {
+      currentFeature: 'dubbing',
+      userProgress: 65,
+      streak: 7,
+      completedTasks: 3,
+      totalTasks: 5
+    };
+
+    // 功能选择
+    function selectFeature(feature) {
+      // 移除所有活跃状态
+      document.querySelectorAll('.feature-card').forEach(card => {
+        card.classList.remove('active');
+      });
+      
+      // 添加活跃状态到选中的卡片
+      event.target.closest('.feature-card').classList.add('active');
+      
+      appState.currentFeature = feature;
+      
+      // 根据选择的功能更新推荐内容
+      updateRecommendedContent(feature);
+      
+      // 显示反馈
+      showToast(`已切换到${getFeatureName(feature)}模式`);
+    }
+
+    // 获取功能名称
+    function getFeatureName(feature) {
+      const names = {
+        'dubbing': '影视配音',
+        'listening': '听力训练',
+        'speaking': '口语练习',
+        'community': '学习社区'
+      };
+      return names[feature] || '未知功能';
+    }
+
+    // 更新推荐内容
+    function updateRecommendedContent(feature) {
+      const contentData = {
+        'dubbing': [
+          { title: '泰坦尼克号 - 经典爱情对白', time: '3分钟', difficulty: 'easy', icon: '🚢' },
+          { title: '老友记 - 日常生活对话', time: '5分钟', difficulty: 'medium', icon: '☕' },
+          { title: 'TED演讲 - 科技与未来', time: '8分钟', difficulty: 'hard', icon: '🎤' }
+        ],
+        'listening': [
+          { title: 'BBC新闻 - 今日要闻', time: '4分钟', difficulty: 'medium', icon: '📺' },
+          { title: '英语播客 - 旅行故事', time: '6分钟', difficulty: 'easy', icon: '🎧' },
+          { title: '学术讲座 - 环境保护', time: '10分钟', difficulty: 'hard', icon: '🌱' }
+        ],
+        'speaking': [
+          { title: '日常对话 - 购物场景', time: '2分钟', difficulty: 'easy', icon: '🛒' },
+          { title: '商务英语 - 会议讨论', time: '5分钟', difficulty: 'hard', icon: '💼' },
+          { title: '旅游英语 - 酒店入住', time: '3分钟', difficulty: 'medium', icon: '🏨' }
+        ],
+        'community': [
+          { title: '本周挑战 - 电影配音大赛', time: '参与中', difficulty: 'medium', icon: '🏆' },
+          { title: '学习小组 - 口语练习', time: '在线', difficulty: 'easy', icon: '👥' },
+          { title: '经验分享 - 学习心得', time: '热门', difficulty: 'easy', icon: '💡' }
+        ]
+      };
+      
+      // 这里可以动态更新内容，为了演示保持静态
+      console.log(`切换到${feature}模式，推荐内容:`, contentData[feature]);
+    }
+
+    // 开始配音练习
+    function startDubbing(content) {
+      const modal = document.getElementById('modal');
+      modal.classList.add('show');
+      
+      // 存储当前选择的内容
+      modal.dataset.content = content;
+    }
+
+    // 关闭模态框
+    function closeModal() {
+      const modal = document.getElementById('modal');
+      modal.classList.remove('show');
+    }
+
+    // 开始练习
+    function startPractice() {
+      const modal = document.getElementById('modal');
+      const content = modal.dataset.content;
+      
+      closeModal();
+      
+      // 模拟开始练习
+      showToast('正在加载练习内容...');
+      
+      setTimeout(() => {
+        showToast('练习已开始！请跟着音频进行配音');
+        // 这里可以跳转到练习页面或显示练习界面
+        simulatePracticeProgress();
+      }, 1500);
+    }
+
+    // 模拟练习进度
+    function simulatePracticeProgress() {
+      let progress = 0;
+      const interval = setInterval(() => {
+        progress += 10;
+        if (progress <= 100) {
+          updateProgress(progress);
+        } else {
+          clearInterval(interval);
+          completePractice();
+        }
+      }, 800);
+    }
+
+    // 更新进度
+    function updateProgress(progress) {
+      const progressFill = document.querySelector('.progress-fill');
+      const progressText = document.querySelector('.progress-text');
+      
+      progressFill.style.width = `${progress}%`;
+      
+      if (progress === 100) {
+        appState.completedTasks = Math.min(appState.completedTasks + 1, appState.totalTasks);
+        const newProgress = Math.round((appState.completedTasks / appState.totalTasks) * 100);
+        progressText.textContent = `已完成 ${appState.completedTasks}/${appState.totalTasks} 个任务 (${newProgress}%)`;
+      }
+    }
+
+    // 完成练习
+    function completePractice() {
+      showToast('🎉 恭喜完成练习！获得10经验值');
+      
+      // 更新连续天数（模拟）
+      if (Math.random() > 0.5) {
+        appState.streak += 1;
+        document.querySelector('.streak').textContent = `🔥 连续${appState.streak}天`;
+      }
+    }
+
+    // 显示通知
+    function showNotification() {
+      showToast('📢 新的学习内容已更新！');
+    }
+
+    // 显示进度页面
+    function showProgress() {
+      showToast('📊 学习进度页面开发中...');
+    }
+
+    // 显示社区页面
+    function showCommunity() {
+      showToast('👥 学习社区页面开发中...');
+    }
+
+    // 显示个人页面
+    function showProfile() {
+      showToast('👤 个人中心页面开发中...');
+    }
+
+    // 显示提示信息
+    function showToast(message) {
+      // 创建提示元素
+      const toast = document.createElement('div');
+      toast.style.cssText = `
+        position: fixed;
+        top: 50%;
+        left: 50%;
+        transform: translate(-50%, -50%);
+        background: rgba(0,0,0,0.8);
+        color: white;
+        padding: 12px 20px;
+        border-radius: 20px;
+        font-size: 14px;
+        z-index: 2000;
+        animation: fadeInOut 2s ease;
+      `;
+      toast.textContent = message;
+      
+      // 添加动画样式
+      const style = document.createElement('style');
+      style.textContent = `
+        @keyframes fadeInOut {
+          0%, 100% { opacity: 0; transform: translate(-50%, -50%) scale(0.8); }
+          20%, 80% { opacity: 1; transform: translate(-50%, -50%) scale(1); }
+        }
+      `;
+      document.head.appendChild(style);
+      
+      document.body.appendChild(toast);
+      
+      // 2秒后移除
+      setTimeout(() => {
+        document.body.removeChild(toast);
+        document.head.removeChild(style);
+      }, 2000);
+    }
+
+    // 底部导航切换
+    document.querySelectorAll('.nav-item').forEach(item => {
+      item.addEventListener('click', function(e) {
+        e.preventDefault();
+        
+        // 移除所有活跃状态
+        document.querySelectorAll('.nav-item').forEach(nav => {
+          nav.classList.remove('active');
+        });
+        
+        // 添加活跃状态
+        this.classList.add('active');
+      });
+    });
+
+    // 点击模态框背景关闭
+    document.getElementById('modal').addEventListener('click', function(e) {
+      if (e.target === this) {
+        closeModal();
+      }
+    });
+
+    // 页面加载完成后的初始化
+    document.addEventListener('DOMContentLoaded', function() {
+      // 显示欢迎信息
+      setTimeout(() => {
+        showToast('欢迎使用配音学英语App！');
+      }, 1000);
+      
+      // 模拟数据加载
+      console.log('App初始化完成', appState);
+    });
+
+    // 键盘事件处理
+    document.addEventListener('keydown', function(e) {
+      if (e.key === 'Escape') {
+        closeModal();
+      }
+    });
+
+    // 触摸事件优化（移动端）
+    let touchStartY = 0;
+    document.addEventListener('touchstart', function(e) {
+      touchStartY = e.touches[0].clientY;
+    });
+
+    document.addEventListener('touchmove', function(e) {
+      const touchY = e.touches[0].clientY;
+      const deltaY = touchY - touchStartY;
+      
+      // 防止过度滚动
+      if (deltaY > 0 && window.scrollY === 0) {
+        e.preventDefault();
+      }
+    }, { passive: false });
+  </script>
+</body>
+</html>

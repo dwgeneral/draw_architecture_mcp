@@ -1,0 +1,954 @@
+<!DOCTYPE html>
+<html lang="zh-CN">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>配音学英语App - 产品原型图</title>
+    <style>
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+        }
+
+        body {
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+            background-color: #f5f5f5;
+            color: #333;
+            line-height: 1.6;
+        }
+
+        .container {
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 20px;
+        }
+
+        .prototype-header {
+            text-align: center;
+            margin-bottom: 40px;
+            background: linear-gradient(135deg, #667eea 0%, #764ba2 100%);
+            color: white;
+            padding: 30px;
+            border-radius: 10px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .prototype-header h1 {
+            font-size: 2.5em;
+            margin-bottom: 10px;
+        }
+
+        .prototype-header p {
+            font-size: 1.2em;
+            opacity: 0.9;
+        }
+
+        .screens-grid {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(350px, 1fr));
+            gap: 30px;
+            margin-bottom: 40px;
+        }
+
+        .screen {
+            background: white;
+            border-radius: 15px;
+            box-shadow: 0 8px 25px rgba(0,0,0,0.1);
+            overflow: hidden;
+            transition: transform 0.3s ease, box-shadow 0.3s ease;
+        }
+
+        .screen:hover {
+            transform: translateY(-5px);
+            box-shadow: 0 12px 35px rgba(0,0,0,0.15);
+        }
+
+        .screen-header {
+            background: #4a90e2;
+            color: white;
+            padding: 15px 20px;
+            font-weight: bold;
+            font-size: 1.1em;
+        }
+
+        .screen-content {
+            padding: 25px;
+            min-height: 400px;
+        }
+
+        .mockup-phone {
+            width: 100%;
+            max-width: 300px;
+            margin: 0 auto;
+            background: #000;
+            border-radius: 25px;
+            padding: 20px 15px;
+            position: relative;
+        }
+
+        .mockup-screen {
+            background: white;
+            border-radius: 15px;
+            padding: 20px;
+            min-height: 500px;
+            position: relative;
+        }
+
+        .status-bar {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            font-size: 12px;
+            color: #666;
+            margin-bottom: 20px;
+            padding-bottom: 10px;
+            border-bottom: 1px solid #eee;
+        }
+
+        .app-header {
+            text-align: center;
+            margin-bottom: 30px;
+        }
+
+        .app-title {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 10px;
+        }
+
+        .app-subtitle {
+            font-size: 14px;
+            color: #666;
+        }
+
+        .btn {
+            display: block;
+            width: 100%;
+            padding: 15px;
+            margin: 10px 0;
+            border: none;
+            border-radius: 8px;
+            font-size: 16px;
+            font-weight: 500;
+            cursor: pointer;
+            transition: all 0.3s ease;
+            text-align: center;
+            text-decoration: none;
+        }
+
+        .btn-primary {
+            background: #4a90e2;
+            color: white;
+        }
+
+        .btn-primary:hover {
+            background: #357abd;
+        }
+
+        .btn-secondary {
+            background: #f8f9fa;
+            color: #333;
+            border: 2px solid #dee2e6;
+        }
+
+        .btn-secondary:hover {
+            background: #e9ecef;
+        }
+
+        .btn-success {
+            background: #28a745;
+            color: white;
+        }
+
+        .btn-warning {
+            background: #ffc107;
+            color: #212529;
+        }
+
+        .input-group {
+            margin-bottom: 20px;
+        }
+
+        .input-group label {
+            display: block;
+            margin-bottom: 5px;
+            font-weight: 500;
+            color: #555;
+        }
+
+        .input-group input {
+            width: 100%;
+            padding: 12px;
+            border: 2px solid #dee2e6;
+            border-radius: 6px;
+            font-size: 14px;
+        }
+
+        .input-group input:focus {
+            outline: none;
+            border-color: #4a90e2;
+        }
+
+        .mode-cards {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .mode-card {
+            background: #f8f9fa;
+            border: 2px solid #dee2e6;
+            border-radius: 10px;
+            padding: 20px;
+            text-align: center;
+            cursor: pointer;
+            transition: all 0.3s ease;
+        }
+
+        .mode-card:hover {
+            border-color: #4a90e2;
+            background: #e3f2fd;
+        }
+
+        .mode-card.active {
+            border-color: #4a90e2;
+            background: #e3f2fd;
+        }
+
+        .mode-icon {
+            font-size: 30px;
+            margin-bottom: 10px;
+        }
+
+        .content-list {
+            margin: 20px 0;
+        }
+
+        .content-item {
+            display: flex;
+            align-items: center;
+            padding: 15px;
+            margin: 10px 0;
+            background: #f8f9fa;
+            border-radius: 8px;
+            cursor: pointer;
+            transition: background 0.3s ease;
+        }
+
+        .content-item:hover {
+            background: #e9ecef;
+        }
+
+        .content-icon {
+            width: 40px;
+            height: 40px;
+            background: #4a90e2;
+            border-radius: 50%;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            color: white;
+            margin-right: 15px;
+            font-weight: bold;
+        }
+
+        .content-info h4 {
+            margin-bottom: 5px;
+            color: #333;
+        }
+
+        .content-info p {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .audio-player {
+            background: #f8f9fa;
+            border-radius: 10px;
+            padding: 20px;
+            margin: 20px 0;
+            text-align: center;
+        }
+
+        .play-button {
+            width: 60px;
+            height: 60px;
+            background: #4a90e2;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 24px;
+            cursor: pointer;
+            margin: 10px auto;
+            display: block;
+        }
+
+        .waveform {
+            height: 40px;
+            background: linear-gradient(90deg, #4a90e2 0%, #357abd 50%, #4a90e2 100%);
+            border-radius: 20px;
+            margin: 15px 0;
+            position: relative;
+            overflow: hidden;
+        }
+
+        .waveform::after {
+            content: '';
+            position: absolute;
+            top: 0;
+            left: 0;
+            width: 30%;
+            height: 100%;
+            background: rgba(255,255,255,0.3);
+            animation: wave 2s infinite;
+        }
+
+        @keyframes wave {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
+        }
+
+        .record-button {
+            width: 80px;
+            height: 80px;
+            background: #dc3545;
+            border: none;
+            border-radius: 50%;
+            color: white;
+            font-size: 30px;
+            cursor: pointer;
+            margin: 20px auto;
+            display: block;
+            animation: pulse 2s infinite;
+        }
+
+        @keyframes pulse {
+            0% { transform: scale(1); }
+            50% { transform: scale(1.1); }
+            100% { transform: scale(1); }
+        }
+
+        .score-display {
+            text-align: center;
+            margin: 30px 0;
+        }
+
+        .score-circle {
+            width: 120px;
+            height: 120px;
+            border-radius: 50%;
+            background: conic-gradient(#28a745 0deg 288deg, #e9ecef 288deg 360deg);
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            margin: 0 auto 20px;
+            position: relative;
+        }
+
+        .score-circle::before {
+            content: '';
+            width: 90px;
+            height: 90px;
+            background: white;
+            border-radius: 50%;
+            position: absolute;
+        }
+
+        .score-text {
+            font-size: 24px;
+            font-weight: bold;
+            color: #28a745;
+            z-index: 1;
+        }
+
+        .analysis-item {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 10px 0;
+            border-bottom: 1px solid #eee;
+        }
+
+        .analysis-item:last-child {
+            border-bottom: none;
+        }
+
+        .progress-bar {
+            width: 60%;
+            height: 8px;
+            background: #e9ecef;
+            border-radius: 4px;
+            overflow: hidden;
+        }
+
+        .progress-fill {
+            height: 100%;
+            background: #28a745;
+            transition: width 0.3s ease;
+        }
+
+        .report-stats {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 15px;
+            margin: 20px 0;
+        }
+
+        .stat-card {
+            background: #f8f9fa;
+            padding: 20px;
+            border-radius: 8px;
+            text-align: center;
+        }
+
+        .stat-number {
+            font-size: 24px;
+            font-weight: bold;
+            color: #4a90e2;
+            margin-bottom: 5px;
+        }
+
+        .stat-label {
+            font-size: 12px;
+            color: #666;
+        }
+
+        .flow-diagram {
+            background: white;
+            border-radius: 10px;
+            padding: 30px;
+            margin-top: 40px;
+            box-shadow: 0 4px 15px rgba(0,0,0,0.1);
+        }
+
+        .flow-title {
+            text-align: center;
+            font-size: 1.5em;
+            margin-bottom: 30px;
+            color: #333;
+        }
+
+        .flow-steps {
+            display: flex;
+            flex-wrap: wrap;
+            justify-content: center;
+            align-items: center;
+            gap: 20px;
+        }
+
+        .flow-step {
+            background: #4a90e2;
+            color: white;
+            padding: 15px 20px;
+            border-radius: 25px;
+            font-size: 14px;
+            font-weight: 500;
+            position: relative;
+        }
+
+        .flow-step::after {
+            content: '→';
+            position: absolute;
+            right: -30px;
+            top: 50%;
+            transform: translateY(-50%);
+            color: #666;
+            font-size: 18px;
+        }
+
+        .flow-step:last-child::after {
+            display: none;
+        }
+
+        .decision-step {
+            background: #ffc107;
+            color: #212529;
+            border-radius: 10px;
+        }
+
+        .action-step {
+            background: #28a745;
+        }
+
+        .process-step {
+            background: #dc3545;
+        }
+
+        @media (max-width: 768px) {
+            .screens-grid {
+                grid-template-columns: 1fr;
+            }
+            
+            .mode-cards {
+                grid-template-columns: 1fr;
+            }
+            
+            .report-stats {
+                grid-template-columns: 1fr;
+            }
+            
+            .flow-steps {
+                flex-direction: column;
+            }
+            
+            .flow-step::after {
+                content: '↓';
+                right: 50%;
+                top: 100%;
+                transform: translateX(50%);
+            }
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div class="prototype-header">
+            <h1>配音学英语App</h1>
+            <p>产品原型图 - Axure风格设计</p>
+        </div>
+
+        <div class="screens-grid">
+            <!-- 启动页面 -->
+            <div class="screen">
+                <div class="screen-header">1. 启动页面</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">配音学英语</div>
+                                <div class="app-subtitle">AI智能发音练习</div>
+                            </div>
+                            <div style="text-align: center; margin: 50px 0;">
+                                <div style="width: 100px; height: 100px; background: linear-gradient(135deg, #4a90e2, #357abd); border-radius: 50%; margin: 0 auto; display: flex; align-items: center; justify-content: center; color: white; font-size: 40px;">🎤</div>
+                            </div>
+                            <div style="text-align: center; color: #666; margin-top: 40px;">
+                                <p>正在加载...</p>
+                                <div style="width: 200px; height: 4px; background: #eee; border-radius: 2px; margin: 20px auto; overflow: hidden;">
+                                    <div style="width: 60%; height: 100%; background: #4a90e2; animation: loading 2s infinite;"></div>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 登录注册页面 -->
+            <div class="screen">
+                <div class="screen-header">2. 登录/注册页面</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">欢迎使用</div>
+                                <div class="app-subtitle">开始你的英语配音之旅</div>
+                            </div>
+                            <div class="input-group">
+                                <label>手机号</label>
+                                <input type="tel" placeholder="请输入手机号">
+                            </div>
+                            <div class="input-group">
+                                <label>验证码</label>
+                                <div style="display: flex; gap: 10px;">
+                                    <input type="text" placeholder="请输入验证码" style="flex: 1;">
+                                    <button class="btn btn-secondary" style="width: auto; padding: 12px 20px;">获取验证码</button>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">登录/注册</button>
+                            <div style="text-align: center; margin-top: 20px; font-size: 12px; color: #666;">
+                                <p>登录即表示同意<a href="#" style="color: #4a90e2;">用户协议</a>和<a href="#" style="color: #4a90e2;">隐私政策</a></p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 主页面 - 模式选择 -->
+            <div class="screen">
+                <div class="screen-header">3. 主页面 - 学习模式选择</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">选择学习模式</div>
+                                <div class="app-subtitle">找到最适合你的练习方式</div>
+                            </div>
+                            <div class="mode-cards">
+                                <div class="mode-card active">
+                                    <div class="mode-icon">📖</div>
+                                    <h4>跟读练习</h4>
+                                    <p>基础发音训练</p>
+                                </div>
+                                <div class="mode-card">
+                                    <div class="mode-icon">🎬</div>
+                                    <h4>配音挑战</h4>
+                                    <p>情景对话练习</p>
+                                </div>
+                            </div>
+                            <div style="margin-top: 30px;">
+                                <h4 style="margin-bottom: 15px;">今日推荐</h4>
+                                <div class="content-item">
+                                    <div class="content-icon">1</div>
+                                    <div class="content-info">
+                                        <h4>日常对话</h4>
+                                        <p>适合初学者 • 5分钟</p>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">2</div>
+                                    <div class="content-info">
+                                        <h4>商务英语</h4>
+                                        <p>职场必备 • 8分钟</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">开始学习</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 内容选择页面 -->
+            <div class="screen">
+                <div class="screen-header">4. 学习内容选择</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">选择学习内容</div>
+                                <div class="app-subtitle">跟读练习模式</div>
+                            </div>
+                            <div class="content-list">
+                                <div class="content-item" style="border: 2px solid #4a90e2; background: #e3f2fd;">
+                                    <div class="content-icon">🗣️</div>
+                                    <div class="content-info">
+                                        <h4>基础发音</h4>
+                                        <p>元音辅音练习 • 难度：⭐⭐</p>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">💼</div>
+                                    <div class="content-info">
+                                        <h4>商务对话</h4>
+                                        <p>职场沟通 • 难度：⭐⭐⭐</p>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">🎬</div>
+                                    <div class="content-info">
+                                        <h4>电影片段</h4>
+                                        <p>经典台词 • 难度：⭐⭐⭐⭐</p>
+                                    </div>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">📰</div>
+                                    <div class="content-info">
+                                        <h4>新闻播报</h4>
+                                        <p>标准发音 • 难度：⭐⭐⭐⭐⭐</p>
+                                    </div>
+                                </div>
+                            </div>
+                            <button class="btn btn-primary">开始练习</button>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 练习页面 -->
+            <div class="screen">
+                <div class="screen-header">5. 练习页面</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">基础发音练习</div>
+                                <div class="app-subtitle">第1课 / 共5课</div>
+                            </div>
+                            <div style="background: #f8f9fa; border-radius: 10px; padding: 20px; margin: 20px 0; text-align: center;">
+                                <h4 style="margin-bottom: 15px;">练习句子</h4>
+                                <p style="font-size: 18px; line-height: 1.8; color: #333;">"Hello, how are you today?"</p>
+                                <p style="font-size: 14px; color: #666; margin-top: 10px;">你好，你今天怎么样？</p>
+                            </div>
+                            <div class="audio-player">
+                                <p style="margin-bottom: 15px; font-weight: 500;">原音播放</p>
+                                <button class="play-button">▶️</button>
+                                <div class="waveform"></div>
+                                <p style="font-size: 12px; color: #666;">点击播放原音</p>
+                            </div>
+                            <div style="text-align: center; margin: 30px 0;">
+                                <p style="margin-bottom: 15px; font-weight: 500;">开始录音</p>
+                                <button class="record-button">🎤</button>
+                                <p style="font-size: 12px; color: #666;">长按录音，松开结束</p>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 评分结果页面 -->
+            <div class="screen">
+                <div class="screen-header">6. AI评分结果</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">发音评分</div>
+                                <div class="app-subtitle">AI智能分析结果</div>
+                            </div>
+                            <div class="score-display">
+                                <div class="score-circle">
+                                    <div class="score-text">80</div>
+                                </div>
+                                <h3 style="color: #28a745; margin-bottom: 10px;">良好</h3>
+                                <p style="color: #666; font-size: 14px;">继续努力，你会更棒！</p>
+                            </div>
+                            <div style="margin: 30px 0;">
+                                <h4 style="margin-bottom: 15px;">详细分析</h4>
+                                <div class="analysis-item">
+                                    <span>发音准确度</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 85%;"></div>
+                                    </div>
+                                    <span>85%</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span>语调自然度</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 75%;"></div>
+                                    </div>
+                                    <span>75%</span>
+                                </div>
+                                <div class="analysis-item">
+                                    <span>语速适中度</span>
+                                    <div class="progress-bar">
+                                        <div class="progress-fill" style="width: 80%;"></div>
+                                    </div>
+                                    <span>80%</span>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-secondary" style="flex: 1;">重新录音</button>
+                                <button class="btn btn-primary" style="flex: 1;">下一题</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 学习报告页面 -->
+            <div class="screen">
+                <div class="screen-header">7. 学习报告</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">学习报告</div>
+                                <div class="app-subtitle">今日练习总结</div>
+                            </div>
+                            <div class="report-stats">
+                                <div class="stat-card">
+                                    <div class="stat-number">25</div>
+                                    <div class="stat-label">练习句子</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">18</div>
+                                    <div class="stat-label">学习分钟</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">82</div>
+                                    <div class="stat-label">平均分数</div>
+                                </div>
+                                <div class="stat-card">
+                                    <div class="stat-number">7</div>
+                                    <div class="stat-label">连续天数</div>
+                                </div>
+                            </div>
+                            <div style="margin: 30px 0;">
+                                <h4 style="margin-bottom: 15px;">进步趋势</h4>
+                                <div style="background: #f8f9fa; border-radius: 8px; padding: 20px; text-align: center;">
+                                    <div style="height: 100px; background: linear-gradient(to top, #4a90e2 0%, #4a90e2 60%, #28a745 60%, #28a745 100%); border-radius: 4px; margin: 0 auto; width: 200px; position: relative;">
+                                        <div style="position: absolute; bottom: 10px; left: 10px; font-size: 12px; color: white;">昨天</div>
+                                        <div style="position: absolute; bottom: 10px; right: 10px; font-size: 12px; color: white;">今天</div>
+                                    </div>
+                                    <p style="margin-top: 15px; font-size: 14px; color: #666;">比昨天提高了5分！</p>
+                                </div>
+                            </div>
+                            <div style="display: flex; gap: 10px;">
+                                <button class="btn btn-secondary" style="flex: 1;">分享成果</button>
+                                <button class="btn btn-primary" style="flex: 1;">继续学习</button>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <!-- 设置页面 -->
+            <div class="screen">
+                <div class="screen-header">8. 设置页面</div>
+                <div class="screen-content">
+                    <div class="mockup-phone">
+                        <div class="mockup-screen">
+                            <div class="status-bar">
+                                <span>9:41</span>
+                                <span>●●●●●</span>
+                                <span>100%</span>
+                            </div>
+                            <div class="app-header">
+                                <div class="app-title">设置</div>
+                                <div class="app-subtitle">个性化你的学习体验</div>
+                            </div>
+                            <div style="margin: 20px 0;">
+                                <div class="content-item">
+                                    <div class="content-icon">👤</div>
+                                    <div class="content-info">
+                                        <h4>个人资料</h4>
+                                        <p>编辑个人信息</p>
+                                    </div>
+                                    <span style="color: #666;">></span>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">🎯</div>
+                                    <div class="content-info">
+                                        <h4>学习目标</h4>
+                                        <p>设置每日练习目标</p>
+                                    </div>
+                                    <span style="color: #666;">></span>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">🔔</div>
+                                    <div class="content-info">
+                                        <h4>提醒设置</h4>
+                                        <p>学习提醒和通知</p>
+                                    </div>
+                                    <span style="color: #666;">></span>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">🎨</div>
+                                    <div class="content-info">
+                                        <h4>主题设置</h4>
+                                        <p>选择你喜欢的主题</p>
+                                    </div>
+                                    <span style="color: #666;">></span>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">❓</div>
+                                    <div class="content-info">
+                                        <h4>帮助与反馈</h4>
+                                        <p>使用帮助和意见反馈</p>
+                                    </div>
+                                    <span style="color: #666;">></span>
+                                </div>
+                                <div class="content-item">
+                                    <div class="content-icon">ℹ️</div>
+                                    <div class="content-info">
+                                        <h4>关于我们</h4>
+                                        <p>版本信息和服务条款</p>
+                                    </div>
+                                    <span style="color: #666;">></span>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- 产品流程图 -->
+        <div class="flow-diagram">
+            <h2 class="flow-title">产品核心流程图</h2>
+            <div class="flow-steps">
+                <div class="flow-step">用户打开App</div>
+                <div class="flow-step decision-step">登录检查</div>
+                <div class="flow-step">登录/注册</div>
+                <div class="flow-step">选择学习模式</div>
+                <div class="flow-step decision-step">模式选择</div>
+                <div class="flow-step action-step">跟读练习</div>
+                <div class="flow-step action-step">配音挑战</div>
+                <div class="flow-step">选择学习内容</div>
+                <div class="flow-step process-step">播放原音</div>
+                <div class="flow-step process-step">用户配音</div>
+                <div class="flow-step process-step">AI智能评分</div>
+                <div class="flow-step">显示评分结果</div>
+                <div class="flow-step decision-step">继续练习?</div>
+                <div class="flow-step">保存学习进度</div>
+                <div class="flow-step">查看学习报告</div>
+                <div class="flow-step">结束学习</div>
+            </div>
+        </div>
+
+        <!-- 设计说明 -->
+        <div class="flow-diagram">
+            <h2 class="flow-title">设计说明</h2>
+            <div style="text-align: left; line-height: 1.8;">
+                <h3 style="color: #4a90e2; margin-bottom: 15px;">设计原则</h3>
+                <ul style="margin-bottom: 25px; padding-left: 20px;">
+                    <li><strong>简洁明了：</strong>界面设计简洁，信息层次清晰，用户能够快速理解和操作</li>
+                    <li><strong>一致性：</strong>保持统一的视觉风格、交互模式和信息架构</li>
+                    <li><strong>易用性：</strong>符合用户习惯，降低学习成本，提高使用效率</li>
+                    <li><strong>反馈及时：</strong>每个操作都有明确的反馈，让用户了解当前状态</li>
+                </ul>
+                
+                <h3 style="color: #4a90e2; margin-bottom: 15px;">核心功能</h3>
+                <ul style="margin-bottom: 25px; padding-left: 20px;">
+                    <li><strong>智能语音识别：</strong>AI技术实现精准的发音评分和分析</li>
+                    <li><strong>个性化学习：</strong>根据用户水平推荐合适的学习内容</li>
+                    <li><strong>进度跟踪：</strong>详细的学习报告和进步趋势分析</li>
+                    <li><strong>多样化内容：</strong>涵盖日常对话、商务英语、影视片段等</li>
+                </ul>
+                
+                <h3 style="color: #4a90e2; margin-bottom: 15px;">技术特色</h3>
+                <ul style="padding-left: 20px;">
+                    <li><strong>实时语音处理：</strong>毫秒级的语音识别和评分反馈</li>
+                    <li><strong>机器学习优化：</strong>根据用户练习数据不断优化评分算法</li>
+                    <li><strong>云端同步：</strong>学习进度和数据实时同步到云端</li>
+                    <li><strong>离线模式：</strong>支持离线下载内容，随时随地练习</li>
+                </ul>
+            </div>
+        </div>
+    </div>
+
+    <style>
+        @keyframes loading {
+            0% { transform: translateX(-100%); }
+            100% { transform: translateX(400%); }
+        }
+    </style>
+</body>
+</html>
